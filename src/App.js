@@ -3,7 +3,6 @@ import TableLists from './TableLists'
 import ShowMore from "./ShowMore";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCommentsAsync } from './redux/reducers/comments/commentsThunks';
-import LoadingComponent from './components/LoadingComponent'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
