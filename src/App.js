@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import TableLists from './TableLists'
+import ShowMore from "./ShowMore";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCommentsAsync } from './redux/reducers/comments/commentsThunks';
+import LoadingComponent from './components/LoadingComponent'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
+
+  const dispatch = useDispatch();
+  const { comments, id } = useSelector((state) => state.comments);
+
+  useEffect(() => {
+    dispatch(loadCommentsAsync())
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <div>
+          <Routes>
+
+            <Route path={`/moreinfo`} element={<ShowMore lists={comments} />} />
+
+            <Route path="/" element={<TableLists lists={comments} />} />
+
+          </Routes>
+        </div>
+
+    </Router>
+
   );
 }
 
